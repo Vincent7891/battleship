@@ -27,9 +27,10 @@ class Gameboard{
 
     receiveAttack(x,y){
         if(this.grid[x][y].Ship){
-            Ship.hit
+            Ship.hit()
+            this.grid[x][y].hitStatus = true
         } else {
-            this.grid[x][y] = "miss"
+            this.grid[x][y] = 'miss'
         }
     }
 
@@ -72,24 +73,25 @@ class Gameboard{
 
 
     placeShip(ship,x,y, direction){
-        let positionIndex = 0
         if(this.checkPositionAvailability(ship, x, y, direction)){
+            let positionIndex = 0
             if (direction === 'horizontal'){
                 for(let i = y; i<y + ship.length; i++){
-                    this.grid[x][i] = {ship, positionIndex}
+                    this.grid[x][i] = {ship, hitStatus:false, positionIndex}
                     positionIndex++
                 }
             }
     
             if (direction === 'vertical'){
                 for(let i = x; i<x + ship.length; i++){
-                    this.grid[i][y] = {ship, positionIndex}
+                    this.grid[i][y] = {ship, hitStatus:false, positionIndex}
                     positionIndex++
                 }
             }
             this.reservedSpaceAroundShip(x, y, direction, ship.length);
             this.placedShipsArray.push(ship)
         }
+        return false
     }
 
     checkIfAllSunk(){
