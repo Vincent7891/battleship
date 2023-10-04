@@ -25,8 +25,15 @@ class Gameboard{
         return true
     }
 
+    receiveAttack(x,y){
+        if(this.grid[x][y].Ship){
+            Ship.hit
+        } else {
+            this.grid[x][y] = "miss"
+        }
+    }
+
     reservedSpaceAroundShip(x, y, direction, shipLength) {
-        // Helper function to mark a cell as reserved if it's within the grid
         const markAsReserved = (row, col) => {
             if (row >= 0 && row < 10 && col >= 0 && col < 10 && this.grid[row][col] === ' ') {
                 this.grid[row][col] = 'reserved';
@@ -62,10 +69,10 @@ class Gameboard{
         }
     }
     
+
+
     placeShip(ship,x,y, direction){
         let positionIndex = 0
-
-        //if not available, returns false
         if(this.checkPositionAvailability(ship, x, y, direction)){
             if (direction === 'horizontal'){
                 for(let i = y; i<y + ship.length; i++){
@@ -83,6 +90,15 @@ class Gameboard{
             this.reservedSpaceAroundShip(x, y, direction, ship.length);
             this.placedShipsArray.push(ship)
         }
+    }
+
+    checkIfAllSunk(){
+        for (let ship of this.placedShipsArray) {
+            if (!ship.isSunk()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 

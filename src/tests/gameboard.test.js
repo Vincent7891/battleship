@@ -8,7 +8,7 @@ describe('Gameboard', () => {
 
   beforeEach(() => {
     gameboard = new Gameboard();
-    ship = new Ship(3); // Assuming your Ship class takes a length as a parameter
+    ship = new Ship(3);
   });
 
   test('initializes a 10x10 grid', () => {
@@ -62,5 +62,20 @@ describe('Gameboard', () => {
     expect(gameboard.placedShipsArray.includes(ship)).toBe(true);
   });
 
+  test('Check if gameboard can check if all ships are sunk', ()=>{
+    const ship1 = new Ship(1);
+    const ship2 = new Ship(1)
+    const ship3 = new Ship(1)
+
+    gameboard.placeShip(ship1, 3, 2, 'horizontal');
+    gameboard.placeShip(ship2, 3, 5, 'horizontal');
+    gameboard.placeShip(ship3, 3, 8, 'horizontal');
+
+    expect(gameboard.checkIfAllSunk()).toBe(false)
+    ship1.hit()
+    ship2.hit()
+    ship3.hit()
+    expect(gameboard.checkIfAllSunk()).toBe(true)
+  })
 });
 
