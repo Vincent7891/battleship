@@ -8,15 +8,17 @@ class Gameboard{
 
     checkPositionAvailability(ship, x, y, direction){
         if (direction === 'horizontal'){
-            for (let i = y; i<y + ship.length; i++){
+            if(y + ship.length > 10) return false; // Ensure the ship doesn't exceed grid width
+            for (let i = y; i < y + ship.length; i++){
                 if(this.grid[x][i] !== ' '){
                     return false
                 }
             }
         }
-
+        
         if (direction === 'vertical'){
-            for(let i = x; i<x + ship.length; i++){
+            if(x + ship.length > 10) return false; // Ensure the ship doesn't exceed grid height
+            for(let i = x; i < x + ship.length; i++){
                 if(this.grid[i][y] !== ' '){
                     return false
                 }
@@ -26,8 +28,8 @@ class Gameboard{
     }
 
     receiveAttack(x,y){
-        if(this.grid[x][y].Ship){
-            Ship.hit()
+        if(this.grid[x][y].ship){
+            this.grid[x][y].ship.hit();
             this.grid[x][y].hitStatus = true
         } else {
             this.grid[x][y] = 'miss'
@@ -91,7 +93,7 @@ class Gameboard{
             this.reservedSpaceAroundShip(x, y, direction, ship.length);
             this.placedShipsArray.push(ship)
         }
-        return false
+        return true
     }
 
     checkIfAllSunk(){

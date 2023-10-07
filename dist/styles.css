@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.overall-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-container{
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.board-container{
+    padding: 50px;
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-board{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    height: 400px;
+    width: 400px;
+}
+
+.opponent-board{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    height: 400px;
+    width: 400px;
+}
+
+
+[class *="opponent-player"]{
+    border: solid black 1px;
+    height: 40px;
+    width: 40px;
+}
+
+[class *="human-player"]{
+    border: solid black 1px;
+    height: 40px;
+    width: 40px;
+}
+
+.miss{
+    background-color: red;
+}
+
+.hit{
+    background-color: green;
+}
+
+.placement-container{
+    height: 240px;
+    width: 240px;
+    border: solid black 1px;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-rows: repeat(6,1fr);
+}
